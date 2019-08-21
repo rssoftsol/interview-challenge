@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
  * @author shekhar
  */
 public class QuestionMarksMatcher {
-	private static final Pattern VALIDPATTERN = Pattern.compile("([0-9]\\?{1,2}[0-9])");
-	private static final Pattern POSSIBLEINVALIDPATTERN1  = Pattern.compile("[0-9]\\?{4,}[0-9]");
+	private static final Pattern VALIDPATTERN = Pattern.compile("([0-9]\\?{3}[0-9])");
+	private static final Pattern POSSIBLEINVALIDPATTERN1  = Pattern.compile("[0-9]\\?{1,2}[0-9]");
 	private static final Pattern POSSIBLEINVALIDPATTERN2 = Pattern.compile("[0-9]\\?{4,}[0-9]");
 	private String statement;
 	private QuestionMarksMatcher(String statement) {
@@ -30,8 +30,8 @@ public class QuestionMarksMatcher {
 	
 	/**
 	 * 
-	 * @return true if all patterns in a statement are ([0-9]\\?{1,2}[0-9] and 
-	 * numbers around question marks, sums up 10
+	 * @return true if all patterns in a statement matches ([0-9]\\?{1,2}[0-9] and 
+	 * numbers around question marks, sums up to 10
 	 */
 	
 	public boolean hasMatch() {
@@ -52,12 +52,15 @@ public class QuestionMarksMatcher {
 	
 	private boolean hasValidMatchedPatterns() {
 		Matcher validMatcher = VALIDPATTERN.matcher(statement);
+		boolean flag = false;
 		while (validMatcher.find()) {
+			flag = true;
             if(!hasRequiredSummation(validMatcher.group())) {
-                return false;
+            	flag = false;
+            	break;
             }
         }
-        return true;
+        return flag;
 	}
 	
 	private static boolean hasRequiredSummation(String s) {
