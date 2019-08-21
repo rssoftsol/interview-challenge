@@ -15,6 +15,7 @@ public class QuestionMarksMatcher {
 	private static final Pattern VALIDPATTERN = Pattern.compile("([0-9]\\?{3}[0-9])");
 	private static final Pattern POSSIBLEINVALIDPATTERN1  = Pattern.compile("[0-9]\\?{1,2}[0-9]");
 	private static final Pattern POSSIBLEINVALIDPATTERN2 = Pattern.compile("[0-9]\\?{4,}[0-9]");
+	private static final int REQUIREDSUMMATION = 10;
 	private String statement;
 	private QuestionMarksMatcher(String statement) {
 		this.statement = filterOutLetters(statement);
@@ -65,7 +66,7 @@ public class QuestionMarksMatcher {
 	
 	private static boolean hasRequiredSummation(String s) {
         if (Character.getNumericValue(s.charAt(0)) +
-                Character.getNumericValue(s.charAt(s.length() - 1)) == 10) {
+                Character.getNumericValue(s.charAt(s.length() - 1)) == REQUIREDSUMMATION) {
             return true;
         };
         return false;
