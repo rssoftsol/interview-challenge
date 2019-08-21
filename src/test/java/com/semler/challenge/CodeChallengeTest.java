@@ -17,5 +17,7 @@ public class CodeChallengeTest {
     public void testInvalidQuestionMarks() {
 		String strWithInvalidQuestionMarks = "arrb6???4xxbl5????eee5";
 		assertFalse(CodeChallenge.questionsMarks(strWithInvalidQuestionMarks));
+		strWithInvalidQuestionMarks = "arrb6eee5eeer5";
+		assertFalse(CodeChallenge.questionsMarks(strWithInvalidQuestionMarks));
     }
 }
