@@ -18,15 +18,15 @@ public class QuestionMarksMatcher {
 	private static final int REQUIREDSUMMATION = 10;
 	private String statement;
 	private QuestionMarksMatcher(String statement) {
-		this.statement = filterOutLetters(statement);
+	    this.statement = filterOutLetters(statement);
 	}
 	
 	public static QuestionMarksMatcher getQuestionMarksMatcher(String statement) {
-		return new QuestionMarksMatcher(filterOutLetters(statement));
+	    return new QuestionMarksMatcher(filterOutLetters(statement));
 	}
 	
 	private static String filterOutLetters(String statement) {
-		return statement.replaceAll("[a-zA-Z]+","");
+	    return statement.replaceAll("[a-zA-Z]+","");
 	}
 	
 	/**
@@ -36,39 +36,39 @@ public class QuestionMarksMatcher {
 	 */
 	
 	public boolean hasMatch() {
-        if (hasInvalidMatches()) {
-            return false;
-        }
-        return hasValidMatchedPatterns();
+		if (hasInvalidMatches()) {
+			return false;
+		}
+		return hasValidMatchedPatterns();
 	}
 	
 	private boolean hasInvalidMatches() {
-		Matcher possibleInvalidMatcher1  = POSSIBLEINVALIDPATTERN1.matcher(statement);
+	    Matcher possibleInvalidMatcher1  = POSSIBLEINVALIDPATTERN1.matcher(statement);
         Matcher possibleInvalidMatcher2 = POSSIBLEINVALIDPATTERN2.matcher(statement);
-		if (possibleInvalidMatcher1.find() || possibleInvalidMatcher2.find()) {
-            return true;
+	    if (possibleInvalidMatcher1.find() || possibleInvalidMatcher2.find()) {
+			return true;
         }
-		return false;
+	    return false;
 	}
 	
 	private boolean hasValidMatchedPatterns() {
-		Matcher validMatcher = VALIDPATTERN.matcher(statement);
-		boolean flag = false;
-		while (validMatcher.find()) {
+	    Matcher validMatcher = VALIDPATTERN.matcher(statement);
+	    boolean flag = false;
+	    while (validMatcher.find()) {
 			flag = true;
-            if(!hasRequiredSummation(validMatcher.group())) {
-            	flag = false;
-            	break;
-            }
+			if(!hasRequiredSummation(validMatcher.group())) {
+				flag = false;
+				break;
+			}
         }
         return flag;
 	}
 	
 	private static boolean hasRequiredSummation(String s) {
-        if (Character.getNumericValue(s.charAt(0)) +
-                Character.getNumericValue(s.charAt(s.length() - 1)) == REQUIREDSUMMATION) {
-            return true;
-        };
+	    if (Character.getNumericValue(s.charAt(0)) +
+		Character.getNumericValue(s.charAt(s.length() - 1)) == REQUIREDSUMMATION) {
+	        return true;
+	    };
         return false;
     }
 }
