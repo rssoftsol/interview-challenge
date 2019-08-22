@@ -11,8 +11,13 @@ public class CodeChallenge {
     }
 
     public static boolean questionsMarks(String statement) {
-    	QuestionMarksMatcher questionMarksMatcher = QuestionMarksMatcher.getQuestionMarksMatcher(statement);
-    	return questionMarksMatcher.hasMatch();
+       return new StringValidator('?', 3).validate(statement);
     }
+
+
+    /*public static boolean questionsMarks(String statement) {
+    	QuestionMarksMatcher questionMarksMatcher = QuestionMarksMatcher.getQuestionMarksMatcher(statement);
+    	return questionMarksMatcher.hasMatch(statement);
+    }*/
 
 }
