@@ -18,14 +18,14 @@ public class QuestionMarksMatcher {
 	private static final int REQUIREDSUMMATION = 10;
 	private String statement;
 	private QuestionMarksMatcher(String statement) {
-	    this.statement = filterOutLetters(statement);
+	    this.statement = statement;
 	}
 	
 	public static QuestionMarksMatcher getQuestionMarksMatcher(String statement) {
-	    return new QuestionMarksMatcher(filterOutLetters(statement));
+	    return new QuestionMarksMatcher(sanitizeStatement(statement));
 	}
 	
-	private static String filterOutLetters(String statement) {
+	private static String sanitizeStatement(String statement) {
 	    return statement.replaceAll("[a-zA-Z]+","");
 	}
 	
