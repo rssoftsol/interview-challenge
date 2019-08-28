@@ -20,7 +20,7 @@ public class StringValidatorTest {
 
 	@Test
 	public void testValidQuestionMarksWithInvalidSum() {
-	    String strWithInvalidQuestionMarks = "arrb6???4xxbl7????eee5";
+	    String strWithInvalidQuestionMarks = "arrb6???4xxbl7???eee5";
 	    assertFalse(new StringValidator('?', 3).validate(strWithInvalidQuestionMarks));
 	}
 
@@ -28,6 +28,12 @@ public class StringValidatorTest {
 	public void testValidQuestionMarksWithoutNumbersAround() {
 	    String strWithInvalidQuestionMarks = "arrb6???4xxbl5????eee5???";
 	    assertFalse(new StringValidator('?', 3).validate(strWithInvalidQuestionMarks));
+	}
+	
+	@Test
+	public void testValidQuestionMarksWithLastCharAsNumber() {
+	    String strWithInvalidQuestionMarks = "arrb6???4xxbl5????eee5yy2???8";
+	    assertTrue(new StringValidator('?', 3).validate(strWithInvalidQuestionMarks));
 	}
 
 	@Test
